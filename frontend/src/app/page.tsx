@@ -58,7 +58,7 @@ export default function ContentListPage() {
     const handleLogout = () => {
         // console.log('handleLogout')
         const newSort = "lastes";
-        setPage(1);
+        setPage(page==1?0:1);
         setSort(newSort)
         setContents([]);
         setFilterUser('')
@@ -271,17 +271,17 @@ export default function ContentListPage() {
                                         const lastPage = page
                                         const lastSort = sort
                                         const lastQuery = query
-                                        console.log('setQuery.lastSort', lastSort)
-                                        console.log('setQuery.sort', sort)
-                                        console.log('setQuery.lastPage', lastPage)
-                                        console.log('setQuery.page', page)
-                                        console.log('setQuery.lastQuery', lastQuery)
-                                        console.log('setQuery.query', query)
+                                        // console.log('setQuery.lastSort', lastSort)
+                                        // console.log('setQuery.sort', sort)
+                                        // console.log('setQuery.lastPage', lastPage)
+                                        // console.log('setQuery.page', page)
+                                        // console.log('setQuery.lastQuery', lastQuery)
+                                        // console.log('setQuery.query', query)
                                         // if(sort=='lastes'&&page==1){
                                             // setTimeout(fetchContents,1000)
                                         // }
                                         setSort("lastes");
-                                        setPage(1);
+                                        setPage(page==1?0:1);
                                         setActiveTab('recent')
                                         setContents([]);
                                         // fetchContents();
@@ -309,7 +309,7 @@ export default function ContentListPage() {
                                         onClick={(e) => {
                                             const newSort = "lastes";
                                             // setLast("");
-                                            setPage(1);
+                                            setPage(page==1?0:1);
                                             setSort(newSort)
                                             setContents([]);
                                             setFilterUser('')
@@ -326,7 +326,7 @@ export default function ContentListPage() {
                                         onClick={() => {
                                             const newSort = "vote";
                                             // setLast("");
-                                            setPage(1);
+                                            setPage(page==1?0:1);
                                             setSort(newSort)
                                             setContents([]);
                                             setFilterUser('')
@@ -345,7 +345,7 @@ export default function ContentListPage() {
                                         onClick={() => {
                                             const newSort = "";
                                             // setLast("");
-                                            setPage(1);
+                                            setPage(page==1?0:1);
                                             setSort(newSort)
                                             setContents([]);
                                             setActiveTab('my')
