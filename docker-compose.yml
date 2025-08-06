@@ -1,0 +1,51 @@
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/go/pretest/qoute
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/qoute_db
+      - REDIS_ADDR=redis:6379
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27027:27017"
+    volumes:
+      - mongo_data:/data/db
+    command: "--quiet --logpath /dev/null"
+    logging:
+      driver: none
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "16379:6379"
+    logging:
+      driver: none
+
+volumes:
+  mongo_data:
+

@@ -1,0 +1,7 @@
+server:
+  port: 80
+
+db:
+  host: mongo
+  port: 27017
+  name: pretest
