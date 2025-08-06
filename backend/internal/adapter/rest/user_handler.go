@@ -12,13 +12,14 @@ func (h *Handler) Register(c echo.Context) error {
 	req := new(struct {
 		Username string `json:"username"`
 		Email    string `json:"email"`
+		Name     string `json:"name"`
 		Password string `json:"password"`
 	})
 	if err := c.Bind(req); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	user, err := h.UserUsecase.Register(req.Username, req.Email, req.Password)
+	user, err := h.UserUsecase.Register(req.Username, req.Email, req.Name, req.Password)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}

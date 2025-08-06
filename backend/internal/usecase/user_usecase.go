@@ -13,13 +13,13 @@ type UserUsecase struct {
 	UserRepo domain.UserRepository
 }
 
-func (uc *UserUsecase) Register(username, email, password string) (*domain.User, error) {
+func (uc *UserUsecase) Register(username, email, name, password string) (*domain.User, error) {
 	// ตรวจสอบ input
 	if strings.TrimSpace(username) == "" {
 		return nil, errors.New("username is required")
 	}
-	if strings.TrimSpace(email) == "" {
-		return nil, errors.New("email is required")
+	if strings.TrimSpace(name) == "" {
+		return nil, errors.New("name is required")
 	}
 	if strings.TrimSpace(password) == "" {
 		return nil, errors.New("password is required")
@@ -38,6 +38,7 @@ func (uc *UserUsecase) Register(username, email, password string) (*domain.User,
 	user := &domain.User{
 		Username: username,
 		Email:    email,
+		Name:     name,
 		Password: string(hash),
 		Created:  time.Now(),
 	}

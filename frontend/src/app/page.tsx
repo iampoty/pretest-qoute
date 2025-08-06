@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import LoginModal from './components/LoginModal'
 import CreateModal from './components/CreateModal'
 import EditModal from './components/EditModal'
+import RegisterModal from './components/RegisterModal'
 import { voteContent } from './lib/api'
 // import LogoutButton from './components/LogoutButton'
 import { useAuth } from './contexts/AuthContext'
@@ -48,6 +49,7 @@ export default function ContentListPage() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showCreateModal, setShowCreateModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
     const [editId, setEditId] = useState('');
     const { user, token, logout } = useAuth()
 
@@ -601,9 +603,10 @@ export default function ContentListPage() {
             */}
 
             {/* {showLoginModal && <LoginModal onLogin={handleLogin} onClose={() => setShowLoginModal(false)} />} */}
-            {showLoginModal && <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />}
             {showCreateModal && <CreateModal contents={contents} setContents={setContents} isOpen={showCreateModal} onClose={() => setShowCreateModal(false)} />}
             {showEditModal && <EditModal id={editId} contents={contents} setContents={setContents} isOpen={showEditModal} onClose={() => setShowEditModal(false)} />}
+            {showLoginModal && <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} showRegister={()=> { console.log('showRegister');setShowRegisterModal(true);setShowLoginModal(false);}}  />}
+            {showRegisterModal && <RegisterModal isOpen={showRegisterModal} onClose={() => setShowRegisterModal(false)} />}
         </div>
 
     );

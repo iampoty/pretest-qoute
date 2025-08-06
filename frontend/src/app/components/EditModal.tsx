@@ -131,7 +131,7 @@ export default function EditModal({ id, isOpen, onClose, contents, setContents }
                     className="mt-4 w-full text-sm text-gray-600 hover:underline"
                 >
                     Cancel
-                </button>
+                </button>                
             </div>
         </div>
     )

@@ -45,10 +45,11 @@ func TestUserUsecase_Register(t *testing.T) {
 	uc := &UserUsecase{UserRepo: mockRepo}
 
 	username := "johndoe"
+	name := "johndoe"
 	email := "john@example.com"
 	password := "secret123"
 
-	user, err := uc.Register(username, email, password)
+	user, err := uc.Register(username, email, name, password)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -58,23 +59,28 @@ func TestUserUsecase_Register(t *testing.T) {
 	}
 
 	// ทดสอบกรณี username ซ้ำ
-	_, err = uc.Register(username, "other@example.com", "pass")
+	_, err = uc.Register(username, "other@example.com", "other", "pass")
 	if err == nil {
 		t.Errorf("expected error for duplicate username")
 	}
 
 	// username ว่าง
-	_, err = uc.Register("", "other@example.com", "pass")
+	_, err = uc.Register("", "other@example.com", "other", "pass")
 	if err == nil {
 		t.Errorf("expected error for username is required")
 	}
-	// email ว่าง
-	_, err = uc.Register("user01", "", "pass")
+	// name ว่าง
+	_, err = uc.Register("user01", "other@example.com", "", "pass")
 	if err == nil {
-		t.Errorf("expected error for email is required")
+		t.Errorf("expected error for name is required")
 	}
+	// // email ว่าง
+	// _, err = uc.Register("user01", "", "other", "pass")
+	// if err != nil {
+	// 	t.Errorf("expected error for email is required")
+	// }
 	// password ว่าง
-	_, err = uc.Register("user01", "other@example.com", "")
+	_, err = uc.Register("user01", "other@example.com", "other", "")
 	if err == nil {
 		t.Errorf("expected error for password is required")
 	}
@@ -86,10 +92,11 @@ func TestUserUsecase_Login(t *testing.T) {
 
 	// สร้าง user ล่วงหน้า (ใช้ Register)
 	username := "janedoe"
+	name := "janedoe"
 	email := "jane@example.com"
 	password := "mypassword"
 
-	_, err := uc.Register(username, email, password)
+	_, err := uc.Register(username, email, name, password)
 	if err != nil {
 		t.Fatalf("failed to register user: %v", err)
 	}
