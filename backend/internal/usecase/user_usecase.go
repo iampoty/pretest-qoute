@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"errors"
+	"fmt"
 	"pretest/qoute/internal/domain"
 	"strings"
 	"time"
@@ -36,8 +37,8 @@ func (uc *UserUsecase) Register(username, email, name, password string) (*domain
 	}
 
 	user := &domain.User{
-		Username: username,
-		Email:    email,
+		Username: strings.ToLower(username),
+		Email:    fmt.Sprintf("%s@test", username),
 		Name:     name,
 		Password: string(hash),
 		Created:  time.Now(),
@@ -49,6 +50,7 @@ func (uc *UserUsecase) Register(username, email, name, password string) (*domain
 }
 
 func (uc *UserUsecase) Login(username, password string) (*domain.User, error) {
+	username = strings.ToLower(username)
 	user, err := uc.UserRepo.FindByUsername(username)
 	if err != nil || user == nil {
 		return nil, errors.New("invalid username or password")
